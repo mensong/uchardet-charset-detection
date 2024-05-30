@@ -104,8 +104,8 @@ detect(FILE *fp,
                 /* Skip this case for now. */
                 continue;
 
-            if (strcasecmp(expected_charset, uchardet_get_encoding(handle, i)) == 0 &&
-                strcasecmp(expected_lang, uchardet_get_language(handle, i)) == 0)
+            if (stricmp(expected_charset, uchardet_get_encoding(handle, i)) == 0 &&
+                stricmp(expected_lang, uchardet_get_language(handle, i)) == 0)
             {
                 *expected_confidence = uchardet_get_confidence(handle, i);
                 *expected_candidate = i;
