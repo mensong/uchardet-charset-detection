@@ -59,7 +59,7 @@ extern "C" {
 #elif defined(__GNUC__) || defined(__clang__)
 #define DEPRECATED(message) __attribute__ ((deprecated))
 #elif defined(_MSC_VER)
-#define DEPRECATED(message) __declspec(deprecated) func
+#define DEPRECATED(message) __declspec(deprecated)
 #else
 #warning("DEPRECATED macro not available")
 #define DEPRECATED(message)
