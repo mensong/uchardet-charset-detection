@@ -35,7 +35,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 #include "../uchardet.h"
-#include <getopt.h>
+#include "getopt.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -44,6 +44,12 @@
 #define VERSION "Unknown"
 #endif
 #define BUFFER_SIZE 65536
+
+#ifdef _WIN32
+#define _strtok strtok_s
+#elif
+#define _strtok strtok_r
+#endif
 
 static char buffer[BUFFER_SIZE];
 
@@ -179,7 +185,7 @@ int main(int argc, char ** argv)
                 char *saveptr;
                 char *comma;
 
-                lang_weight = strtok_r (optarg, ",", &saveptr);
+                lang_weight = _strtok(optarg, ",", &saveptr);
                 do
                 {
                     comma = strchr (lang_weight, ':');
@@ -192,7 +198,7 @@ int main(int argc, char ** argv)
                     *comma = '\0';
                     uchardet_weigh_language(handle, lang_weight, strtof (comma + 1, NULL));
                 }
-                while ((lang_weight = strtok_r (NULL, ",", &saveptr)));
+                while ((lang_weight = _strtok(NULL, ",", &saveptr)));
             }
             break;
         case '?':
